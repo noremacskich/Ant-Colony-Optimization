@@ -112,37 +112,37 @@ namespace Ant_Optimization_Algorithm
 
 
 
-                placeAnt(ant, )
+                //placeAnt(ant, )
             }
         }
 
-        private int findNextMovementSpotx(int currentX, int currentY)
-        {
+        //private int findNextMovementSpotx(int currentX, int currentY)
+        //{
 
-            gridCell[,] tempSurrounding = getSurrounding(currentX, currentY);
-
-
-            for(int x=0; x<3; x++)
-            {
-                for(int y=0; y<3; y++)
-                {
-
-                    if (tempSurrounding[x, y].isBeyoundEdge)
-                    {
-                        // Skip this one
-                        continue;
-                    }
-                    else
-                    {
-
-                    }
-
-                }
-
-            }
+        //    gridCell[,] tempSurrounding = getSurrounding(currentX, currentY);
 
 
-        }
+        //    for(int x=0; x<3; x++)
+        //    {
+        //        for(int y=0; y<3; y++)
+        //        {
+
+        //            if (tempSurrounding[x, y].isBeyoundEdge)
+        //            {
+        //                // Skip this one
+        //                continue;
+        //            }
+        //            else
+        //            {
+
+        //            }
+
+        //        }
+
+        //    }
+
+
+        //}
 
         private void placeAnt(Ant antToPlace, int x, int y)
         {
