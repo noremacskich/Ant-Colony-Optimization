@@ -15,6 +15,8 @@ namespace Ant_Optimization_Algorithm
         public int currentXPosition;
         public int currentYPosition;
 
+
+
         public Ant(int thisAntID)
         {
             antID = thisAntID;
