@@ -15,7 +15,13 @@ namespace Ant_Optimization_Algorithm
         public int currentXPosition;
         public int currentYPosition;
 
+        public List<City> visitedCities = new List<City>();
 
+        /// <summary>returns any city that hasn't been visited yet from the passed in parameter</summary>
+        public List<City> citiesToVisit(List<City> completeCityList)
+        {
+            return completeCityList.Except(visitedCities).ToList();
+        }
 
         public Ant(int thisAntID)
         {
