@@ -12,8 +12,6 @@ namespace Ant_Optimization_Algorithm
 
         public int pheromoneDepositeStrength { get; set; }
 
-        public City currentCity;
-
         public List<City> visitedCities = new List<City>();
 
         /// <summary>returns any city that hasn't been visited yet from the passed in parameter</summary>

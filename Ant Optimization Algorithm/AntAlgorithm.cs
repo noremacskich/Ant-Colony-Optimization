@@ -110,7 +110,6 @@ namespace Ant_Optimization_Algorithm
             return currentOutput;
         }
 
-
         public string updateOutput()
         {
             return updateOutput(currentGrid, GRIDSIZEX, GRIDSIZEY);
@@ -141,38 +140,6 @@ namespace Ant_Optimization_Algorithm
             }
         }
 
-        private void placeAllAnts()
-        {
-            foreach(Ant ant in lstOfAnts)
-            {
-
-
-
-
-                //placeAnt(ant, )
-            }
-        }
-
-        /// <summary>
-        /// Places the Ants on the grid.
-        /// </summary>
-        private void initializeAnts()
-        {
-
-            for(int i = 0; i< NumOfAnts; i++)
-            {
-
-                Ant newAnt = new Ant(i)
-                {
-                    //currentXPosition = i,
-                    //currentYPosition = i * 2
-                };
-
-                lstOfAnts.Add(newAnt);
-
-            }
-
-        }
 
         public gridCell[,] getSurrounding(int cellx, int celly, int radius = 1)
         {
@@ -220,6 +187,15 @@ namespace Ant_Optimization_Algorithm
 
                 City tmpCity = new City { ID = i };
 
+                Ant tmpAnt = new Ant(i);
+
+                tmpAnt.visitedCities.Add(tmpCity);
+
+                tmpCity.currentAnt = tmpAnt;
+
+                lstOfAnts.Add(tmpAnt);
+
+
                 // Keep assigning random locations until we find a grid cell that doesn't have a city.
                 do
                 {
@@ -231,7 +207,7 @@ namespace Ant_Optimization_Algorithm
 
                 // Assign the city to the grid
                 currentGrid[tmpCity.locationX, tmpCity.locationY].ThisCity = tmpCity;
-
+                
                 // Add it to the list of Cities
                 cityNodes.Add(tmpCity);
 
