@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 namespace Ant_Optimization_Algorithm
 {
     /// <summary>An edge is the fancy term for a path that an ant decides to follow between cities.</summary>
-    class Edge
+    public class Edge
     {
-        City destination { get; set; }
-        City source { get; set; }
-        int ID { get; set; }
+        public City destination { get; set; }
+        public City source { get; set; }
+        public int ID { get; set; }
 
     }
 }

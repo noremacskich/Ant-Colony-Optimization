@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ant_Optimization_Algorithm
 {
-    class Ant
+    public class Ant
     {
         public int antID { get; set; }
 

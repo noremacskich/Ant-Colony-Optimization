@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace Ant_Optimization_Algorithm
 {
     /// <summary>This is a city that an ant can travel to.  At some point it will have a list of food it contains.</summary>
-    class City
+    public class City
     {
-        string Name { get; set; }
-        int ID { get; set; }
+        public string Name { get; set; }
+        public int ID { get; set; }
     }
 }
