@@ -12,7 +12,7 @@ namespace Ant_Optimization_Algorithm
 {
     public partial class Form1 : Form
     {
-        AntAlgorithm algorithm = new AntAlgorithm();
+        AntAlgorithm algorithm = new AntAlgorithm(10);
 
 
         public Form1()
@@ -28,11 +28,8 @@ namespace Ant_Optimization_Algorithm
         private void button1_Click(object sender, EventArgs e)
         {
 
-            algorithm.placeCitiesOnGrid(10);
-
-
-
             rtbOutput.Text = algorithm.showCities();
+
         }
     }
 }

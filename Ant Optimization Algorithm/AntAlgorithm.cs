@@ -164,8 +164,8 @@ namespace Ant_Optimization_Algorithm
 
                 Ant newAnt = new Ant(i)
                 {
-                    currentXPosition = i,
-                    currentYPosition = i * 2
+                    //currentXPosition = i,
+                    //currentYPosition = i * 2
                 };
 
                 lstOfAnts.Add(newAnt);
