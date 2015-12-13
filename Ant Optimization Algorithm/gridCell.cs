@@ -12,6 +12,8 @@ namespace Ant_Optimization_Algorithm
 
         public Ant currentAnt;
 
+        public City ThisCity;
+
         public int pheromoneLevel { get; set; }
 
         public int difficultyPassing { get; set; }

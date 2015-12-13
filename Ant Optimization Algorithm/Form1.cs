@@ -27,7 +27,12 @@ namespace Ant_Optimization_Algorithm
 
         private void button1_Click(object sender, EventArgs e)
         {
-            rtbOutput.Text = algorithm.updateOutput();
+
+            algorithm.placeCitiesOnGrid(10);
+
+
+
+            rtbOutput.Text = algorithm.showCities();
         }
     }
 }

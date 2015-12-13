@@ -20,6 +20,8 @@ namespace Ant_Optimization_Algorithm
 
         List<Ant> lstOfAnts = new List<Ant>();
 
+        List<City> cityNodes = new List<City>();
+
         RichTextBox updateTextbox;
 
         private string updateOutput(gridCell[,] grid, int sizeX, int sizeY)
@@ -79,9 +81,44 @@ namespace Ant_Optimization_Algorithm
             return currentOutput;
         }
 
+        private string printCities(gridCell[,] grid, int sizeX, int sizeY)
+        {
+
+            string currentOutput = "";
+
+            int paddingSize = 3;
+
+            for (int x = 0; x < sizeX; x++)
+            {
+                for (int y = 0; y < sizeY; y++)
+                {
+                    if (grid[x, y].ThisCity != null)
+                    {
+                        currentOutput += grid[x, y].ThisCity.ID.ToString().PadLeft(paddingSize);
+                    }
+                    else
+                    {
+                        currentOutput += "".PadLeft(paddingSize);
+                    }
+
+                }
+
+                currentOutput += "\r\n";
+
+            }
+
+            return currentOutput;
+        }
+
+
         public string updateOutput()
         {
             return updateOutput(currentGrid, GRIDSIZEX, GRIDSIZEY);
+        }
+
+        public string showCities()
+        {
+            return printCities(currentGrid, GRIDSIZEX, GRIDSIZEY);
         }
 
         public string testGetSurrounding(int positionX, int positionY)
@@ -116,56 +153,6 @@ namespace Ant_Optimization_Algorithm
             }
         }
 
-        //private int findNextMovementSpotx(int currentX, int currentY)
-        //{
-
-        //    gridCell[,] tempSurrounding = getSurrounding(currentX, currentY);
-
-
-        //    for(int x=0; x<3; x++)
-        //    {
-        //        for(int y=0; y<3; y++)
-        //        {
-
-        //            if (tempSurrounding[x, y].isBeyoundEdge)
-        //            {
-        //                // Skip this one
-        //                continue;
-        //            }
-        //            else
-        //            {
-
-        //            }
-
-        //        }
-
-        //    }
-
-
-        //}
-
-        private void placeAnt(Ant antToPlace, int x, int y)
-        {
-
-            if(x > GRIDSIZEX || y > GRIDSIZEY)
-            {
-                throw new Exception("Not able to place ant on the grid, out of bounds.");
-            }
-
-            // First add it to the visitors list
-            currentGrid[antToPlace.currentXPosition, antToPlace.currentYPosition].AntVisitors.Add(antToPlace);
-
-            // Next remove the ant from this gridcell
-            currentGrid[antToPlace.currentXPosition, antToPlace.currentYPosition].currentAnt = antToPlace;
-
-            // Now place the ant in the new cell
-            currentGrid[x, y].currentAnt = antToPlace;
-
-            // and give it new values
-            antToPlace.currentXPosition = x;
-            antToPlace.currentYPosition = y;
-
-        }
         /// <summary>
         /// Places the Ants on the grid.
         /// </summary>
@@ -225,10 +212,36 @@ namespace Ant_Optimization_Algorithm
             return surroundingCells;
         }
 
-        public AntAlgorithm()
+
+        private void placeCitiesOnGrid(int numberOfCities)
+        {
+            for(int i = 0; i<numberOfCities; i++)
+            {
+
+                City tmpCity = new City { ID = i };
+
+                // Keep assigning random locations until we find a grid cell that doesn't have a city.
+                do
+                {
+                    tmpCity.locationX = rand.Next(GRIDSIZEX);
+                    tmpCity.locationY = rand.Next(GRIDSIZEY);
+
+                } while (currentGrid[tmpCity.locationX, tmpCity.locationY].ThisCity != null);
+
+
+                // Assign the city to the grid
+                currentGrid[tmpCity.locationX, tmpCity.locationY].ThisCity = tmpCity;
+
+                // Add it to the list of Cities
+                cityNodes.Add(tmpCity);
+
+            }
+        }
+
+        public AntAlgorithm(int numberOfCities = 10)
         {
             initializeGrid();
-
+            placeCitiesOnGrid(numberOfCities);
         }
 
     }

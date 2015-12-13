@@ -12,8 +12,7 @@ namespace Ant_Optimization_Algorithm
 
         public int pheromoneDepositeStrength { get; set; }
 
-        public int currentXPosition;
-        public int currentYPosition;
+        public City currentCity;
 
         public List<City> visitedCities = new List<City>();
 
