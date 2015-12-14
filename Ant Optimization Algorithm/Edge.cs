@@ -16,13 +16,18 @@ namespace Ant_Optimization_Algorithm
 
         public int PheromoneLevel { get; set; }
 
-        public double distance()
+        public double distance
         {
+            get {
 
-            int xPart = (source.locationX - destination.locationX) ^ 2;
-            int yPart = (source.locationY - destination.locationY) ^ 2;
+                int xPart = (source.locationX - destination.locationX) ^ 2;
+                int yPart = (source.locationY - destination.locationY) ^ 2;
 
-            return Math.Sqrt(xPart + yPart);
+                return Math.Sqrt(xPart + yPart);
+            }
+
+            set { }
+            
         }
     }
 }
