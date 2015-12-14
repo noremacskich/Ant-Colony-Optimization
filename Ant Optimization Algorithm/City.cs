@@ -12,7 +12,7 @@ namespace Ant_Optimization_Algorithm
         public string Name { get; set; }
         public int ID { get; set; }
 
-        public Ant currentAnt;
+        public Ant currentAnt { get; set; }
 
         public int locationX { get; set; }
         public int locationY { get; set; }

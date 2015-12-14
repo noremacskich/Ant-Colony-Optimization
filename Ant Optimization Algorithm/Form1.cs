@@ -12,7 +12,7 @@ namespace Ant_Optimization_Algorithm
 {
     public partial class Form1 : Form
     {
-        AntAlgorithm algorithm = new AntAlgorithm(10);
+        AntAlgorithm algorithm = new AntAlgorithm(9);
 
 
         public Form1()

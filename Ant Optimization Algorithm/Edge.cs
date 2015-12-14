@@ -11,7 +11,10 @@ namespace Ant_Optimization_Algorithm
     {
         public City destination { get; set; }
         public City source { get; set; }
+
         public int ID { get; set; }
+
+        public int PheromoneLevel { get; set; }
 
     }
 }

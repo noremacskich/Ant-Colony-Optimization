@@ -12,6 +12,7 @@ namespace Ant_Optimization_Algorithm
     {
         const int GRIDSIZEX = 18;
         const int GRIDSIZEY = 18;
+        const int DEFAULT_PHEROMONE_LEVEL = 5;
         const int NumOfAnts = 4;
 
         Random rand = new Random();
@@ -22,7 +23,10 @@ namespace Ant_Optimization_Algorithm
 
         List<City> cityNodes = new List<City>();
 
+        List<Edge> lstOfEdges = new List<Edge>();
+
         RichTextBox updateTextbox;
+
 
         private string updateOutput(gridCell[,] grid, int sizeX, int sizeY)
         {
@@ -120,6 +124,7 @@ namespace Ant_Optimization_Algorithm
             return printCities(currentGrid, GRIDSIZEX, GRIDSIZEY);
         }
 
+
         public string testGetSurrounding(int positionX, int positionY)
         {
 
@@ -128,18 +133,6 @@ namespace Ant_Optimization_Algorithm
             return updateOutput(test, 3, 3);
 
         }
-
-        private void initializeGrid()
-        {
-            for (int x = 0; x < GRIDSIZEX; x++)
-            {
-                for (int y = 0; y < GRIDSIZEY; y++)
-                {
-                    currentGrid[x, y] = new gridCell { difficultyPassing = (y%4)*(x%4) };
-                }
-            }
-        }
-
 
         public gridCell[,] getSurrounding(int cellx, int celly, int radius = 1)
         {
@@ -180,7 +173,52 @@ namespace Ant_Optimization_Algorithm
         }
 
 
-        private void placeCitiesOnGrid(int numberOfCities)
+
+        private void initializeGrid()
+        {
+            for (int x = 0; x < GRIDSIZEX; x++)
+            {
+                for (int y = 0; y < GRIDSIZEY; y++)
+                {
+                    currentGrid[x, y] = new gridCell { difficultyPassing = (y%4)*(x%4) };
+                }
+            }
+        }
+
+        private void initializeEdges()
+        {
+            int nodeID = 0;
+
+            List<City> completedNodes = new List<City>();
+
+            foreach(City node in cityNodes)
+            {
+                // Add the node to the completed list, to avoid 
+                // links to itself.
+                completedNodes.Add(node);
+
+                // Create a link to every other city that this node currently doesn't have access to.
+                foreach (City otherNode in cityNodes.Except(completedNodes).ToList())
+                {
+                    Edge tmpEdge = new Edge()
+                    {
+                        source = node,
+                        destination = otherNode,
+                        ID = nodeID,
+                        PheromoneLevel = DEFAULT_PHEROMONE_LEVEL
+                    };
+
+                    lstOfEdges.Add(tmpEdge);
+
+                    nodeID++;
+                }
+
+                
+            }
+
+        }
+        
+        private void initializeCities(int numberOfCities)
         {
             for(int i = 0; i<numberOfCities; i++)
             {
@@ -214,10 +252,13 @@ namespace Ant_Optimization_Algorithm
             }
         }
 
+
+
         public AntAlgorithm(int numberOfCities = 10)
         {
             initializeGrid();
-            placeCitiesOnGrid(numberOfCities);
+            initializeCities(numberOfCities);
+            initializeEdges();
         }
 
     }
