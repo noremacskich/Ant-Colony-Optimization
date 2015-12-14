@@ -20,6 +20,22 @@ namespace Ant_Optimization_Algorithm
             return completeCityList.Except(visitedCities).ToList();
         }
 
+        public City currentCity
+        {
+            get
+            {
+                return visitedCities.Last();
+            }
+        }
+
+        public City getNextCity()
+        {
+
+            City nextCity = new City();
+
+            return nextCity;
+        }
+
         public Ant(int thisAntID)
         {
             antID = thisAntID;

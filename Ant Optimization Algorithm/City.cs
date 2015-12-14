@@ -14,6 +14,8 @@ namespace Ant_Optimization_Algorithm
 
         public Ant currentAnt { get; set; }
 
+        public List<Edge> connectedEdges = new List<Edge>();
+
         public int locationX { get; set; }
         public int locationY { get; set; }
     }

@@ -16,6 +16,11 @@ namespace Ant_Optimization_Algorithm
 
         public int PheromoneLevel { get; set; }
 
+        public double subProbability(double Alpha, double Beta)
+        {
+            return Math.Pow(PheromoneLevel, Alpha) * Math.Pow((1 / distance), Beta);
+        }
+
         public double distance
         {
             get {

@@ -210,6 +210,11 @@ namespace Ant_Optimization_Algorithm
 
                     lstOfEdges.Add(tmpEdge);
 
+                    // Add this edge to both the source and destination cities.
+                    // This will allow us to easily get the list of paths for each city
+                    node.connectedEdges.Add(tmpEdge);
+                    otherNode.connectedEdges.Add(tmpEdge);
+
                     nodeID++;
                 }
 
