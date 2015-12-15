@@ -27,10 +27,17 @@ namespace Ant_Optimization_Algorithm
 
         public List<City> visitedCities = new List<City>();
 
+        /// <summary>Needs to be assigned when the ant is created.</summary>
+        public List<City> lstAllCities = new List<City>();
+
         /// <summary>returns any city that hasn't been visited yet from the passed in parameter</summary>
-        public List<City> citiesToVisit(List<City> completeCityList)
+        public List<City> citiesToVisit
         {
-            return completeCityList.Except(visitedCities).ToList();
+            get
+            {
+                return lstAllCities.Except(visitedCities).ToList();
+            }
+            
         }
 
         /// <summary>primarily needed to get the list of possible paths to take.</summary>
@@ -57,12 +64,24 @@ namespace Ant_Optimization_Algorithm
 
         }
 
+        /// <summary>The core of the ants creating their best path.</summary>
         public void constructAntSolution()
         {
-            throw new NotImplementedException("Construct Ant Solution not yet implemented.");
+            // Keep moving to new cities, while we have them.
+            while(citiesToVisit.Count() != 0)
+            {
+
+                City nextCity = getNextCity();
+
+                travelToCity(currentCity, nextCity);
+
+            }
+
+            // Take care of the case for the last city
+            travelToCity(currentCity, visitedCities.First());
         }
 
-        public City getNextCity(List<City> completeCityList, double Alpha = .5, double Beta = .5)
+        public City getNextCity(double Alpha = .5, double Beta = .5)
         {
 
             City nextCity = new City();
@@ -82,15 +101,6 @@ namespace Ant_Optimization_Algorithm
             // Repeat until we get an edge.
             while (true)
             {
-                // If we have visited all cities, return the first city
-                if(EdgesToChooseFrom.Count == 0)
-                {
-                    // State that this ant is done finding a complete path
-                    visitedAllCities = true;
-
-                    // Return the first city.
-                    return visitedCities.First();
-                }
 
                 // If we only have one city to choose from, no need to calculate all possibilities.
                 if(EdgesToChooseFrom.Count == 1)
@@ -116,10 +126,11 @@ namespace Ant_Optimization_Algorithm
 
         }
 
-        public Ant(int thisAntID)
+        public Ant(int thisAntID, List<City> lstOfCities)
         {
             antID = thisAntID;
             pheromoneDepositeStrength = 10;
+            lstAllCities = lstOfCities;
 
         }
     }

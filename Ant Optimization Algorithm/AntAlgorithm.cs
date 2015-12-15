@@ -130,14 +130,6 @@ namespace Ant_Optimization_Algorithm
 
                 City tmpCity = new City { ID = i };
 
-                Ant tmpAnt = new Ant(i);
-
-                tmpAnt.visitedCities.Add(tmpCity);
-
-                tmpCity.currentAnt = tmpAnt;
-
-                lstOfAnts.Add(tmpAnt);
-
 
                 // Keep assigning random locations until we find a grid cell that doesn't have a city.
                 do
@@ -157,13 +149,32 @@ namespace Ant_Optimization_Algorithm
             }
         }
 
+        /// <summary>Create an ant for each city.</summary>
+        public void initializeAnts()
+        {
+            
+            
+            foreach( City city in cityNodes)
+            {
+                Ant tmpAnt = new Ant(city.ID, cityNodes);
 
+                tmpAnt.visitedCities.Add(city);
+
+                city.currentAnt = tmpAnt;
+
+                lstOfAnts.Add(tmpAnt);
+            }
+            
+
+
+        }
 
         public AntAlgorithm(int numberOfCities = 10)
         {
             initializeGrid();
             initializeCities(numberOfCities);
             initializeEdges();
+            initializeAnts();
         }
 
     }
