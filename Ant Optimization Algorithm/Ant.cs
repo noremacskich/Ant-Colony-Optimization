@@ -42,6 +42,26 @@ namespace Ant_Optimization_Algorithm
             }
         }
         
+        /// <summary>will ensure that the path traveled is accounted for, and that the destination is correctly set.</summary>
+        public void travelToCity(City source, City destination)
+        {
+
+            // Add the path between the current city and the destination city
+            lstPathsTraveled.Add((from thisEdge in currentCity.connectedEdges
+                                 where thisEdge.source == source && thisEdge.destination == destination
+                                 select thisEdge).Single());
+
+            // Switch the current city to the destination city
+            // This can be done by adding the destination to the end of the list of cities visited
+            visitedCities.Add(destination);
+
+        }
+
+        public void constructAntSolution()
+        {
+            throw new NotImplementedException("Construct Ant Solution not yet implemented.");
+        }
+
         public City getNextCity(List<City> completeCityList, double Alpha = .5, double Beta = .5)
         {
 
