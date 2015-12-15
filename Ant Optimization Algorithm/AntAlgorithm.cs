@@ -10,8 +10,8 @@ namespace Ant_Optimization_Algorithm
 {
     class AntAlgorithm
     {
-        const int GRIDSIZEX = 18;
-        const int GRIDSIZEY = 18;
+        const int GRIDSIZEX = 200;
+        const int GRIDSIZEY = 200;
         const int DEFAULT_PHEROMONE_LEVEL = 5;
         const int NumOfAnts = 4;
 
@@ -21,109 +21,9 @@ namespace Ant_Optimization_Algorithm
 
         List<Ant> lstOfAnts = new List<Ant>();
 
-        List<City> cityNodes = new List<City>();
+        public List<City> cityNodes = new List<City>();
 
         List<Edge> lstOfEdges = new List<Edge>();
-
-        RichTextBox updateTextbox;
-
-
-        private string updateOutput(gridCell[,] grid, int sizeX, int sizeY)
-        {
-
-            string currentOutput = "";
-
-            int paddingSize = 3;
-
-            for (int x = 0; x < sizeX; x++)
-            { 
-                for (int y = 0; y < sizeY; y++)
-                {
-                    if (grid[x,y].isBeyoundEdge == true) {
-                        currentOutput += "x".PadLeft(paddingSize);
-                    }
-                    else
-                    {
-                        currentOutput += grid[x, y].difficultyPassing.ToString().PadLeft(paddingSize);
-                    }
-                    
-                }
-
-                currentOutput += "\r\n";
-
-            }
-
-            return currentOutput;
-        }
-
-        private string printAntsandFood(gridCell[,] grid, int sizeX, int sizeY)
-        {
-
-            string currentOutput = "";
-
-            int paddingSize = 3;
-
-            for (int x = 0; x < sizeX; x++)
-            {
-                for (int y = 0; y < sizeY; y++)
-                {
-                    if (grid[x, y].currentAnt != null)
-                    {
-                        currentOutput += "x".PadLeft(paddingSize);
-                    }
-                    else
-                    {
-                        currentOutput += "".PadLeft(paddingSize);
-                    }
-
-                }
-
-                currentOutput += "\r\n";
-
-            }
-
-            return currentOutput;
-        }
-
-        private string printCities(gridCell[,] grid, int sizeX, int sizeY)
-        {
-
-            string currentOutput = "";
-
-            int paddingSize = 3;
-
-            for (int x = 0; x < sizeX; x++)
-            {
-                for (int y = 0; y < sizeY; y++)
-                {
-                    if (grid[x, y].ThisCity != null)
-                    {
-                        currentOutput += grid[x, y].ThisCity.ID.ToString().PadLeft(paddingSize);
-                    }
-                    else
-                    {
-                        currentOutput += "".PadLeft(paddingSize);
-                    }
-
-                }
-
-                currentOutput += "\r\n";
-
-            }
-
-            return currentOutput;
-        }
-
-        public string updateOutput()
-        {
-            return updateOutput(currentGrid, GRIDSIZEX, GRIDSIZEY);
-        }
-
-        public string showCities()
-        {
-            return printCities(currentGrid, GRIDSIZEX, GRIDSIZEY);
-        }
-
 
         public string testGetSurrounding(int positionX, int positionY)
         {

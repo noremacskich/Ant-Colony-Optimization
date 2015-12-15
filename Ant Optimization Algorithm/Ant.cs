@@ -14,6 +14,17 @@ namespace Ant_Optimization_Algorithm
 
         public bool visitedAllCities { get; set; }
 
+        /// <summary>Get the distance traveled based on what edges we have visited.</summary>
+        public double distanceTraveled
+        {
+            get
+            {
+                return lstPathsTraveled.Sum(x => x.distance);
+            }
+        }
+
+        public List<Edge> lstPathsTraveled = new List<Edge>();
+
         public List<City> visitedCities = new List<City>();
 
         /// <summary>returns any city that hasn't been visited yet from the passed in parameter</summary>
@@ -30,7 +41,7 @@ namespace Ant_Optimization_Algorithm
                 return visitedCities.Last();
             }
         }
-
+        
         public City getNextCity(List<City> completeCityList, double Alpha = .5, double Beta = .5)
         {
 

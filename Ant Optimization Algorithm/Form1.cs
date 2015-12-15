@@ -28,7 +28,29 @@ namespace Ant_Optimization_Algorithm
         private void button1_Click(object sender, EventArgs e)
         {
 
-            rtbOutput.Text = algorithm.showCities();
+            //rtbOutput.Text = algorithm.showCities();
+
+        }
+        private void drawCity(City currentCity, Graphics canvas)
+        {
+
+            Pen pen1 = new Pen(Color.Blue, 3);
+
+            canvas.DrawEllipse(pen1, currentCity.locationX, currentCity.locationY, 15, 15);
+            canvas.DrawString(currentCity.ID.ToString(), DefaultFont, Brushes.Blue, new PointF(currentCity.locationX + 2, currentCity.locationY + 2));
+
+        }
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+            System.Drawing.Graphics graphic;
+
+            graphic = pictureBox1.CreateGraphics();
+
+            foreach(City selectedCity in algorithm.cityNodes)
+            {
+                drawCity(selectedCity, graphic);
+            }
 
         }
     }
