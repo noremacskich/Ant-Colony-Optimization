@@ -70,7 +70,14 @@ namespace Ant_Optimization_Algorithm
 
             // Switch the current city to the destination city
             // This can be done by adding the destination to the end of the list of cities visited
-            visitedCities.Add(destination);
+
+            // If this is the last city, we don't actually need to put the city here, all we need is the path between them
+            if (!visitedAllCities)
+            {
+                visitedCities.Add(destination);
+            }
+            
+
 
         }
 
@@ -92,6 +99,8 @@ namespace Ant_Optimization_Algorithm
                 travelToCity(currentCity, nextCity);
 
             }
+
+            visitedAllCities = true;
 
             // Take care of the case for the last city
             travelToCity(currentCity, visitedCities.First());
@@ -122,7 +131,6 @@ namespace Ant_Optimization_Algorithm
                 // If we only have one city to choose from, no need to calculate all possibilities.
                 if(EdgesToChooseFrom.Count == 1)
                 {
-                    visitedAllCities = true;
                     return EdgesToChooseFrom.First().destination;
                 }
 
