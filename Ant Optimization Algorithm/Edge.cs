@@ -25,8 +25,8 @@ namespace Ant_Optimization_Algorithm
         {
             get {
 
-                int xPart = (source.locationX - destination.locationX) ^ 2;
-                int yPart = (source.locationY - destination.locationY) ^ 2;
+                double xPart = Math.Pow((source.locationX - destination.locationX), 2);
+                double yPart = Math.Pow((source.locationY - destination.locationY), 2);
 
                 return Math.Sqrt(xPart + yPart);
             }
