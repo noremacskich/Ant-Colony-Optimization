@@ -14,6 +14,11 @@ namespace Ant_Optimization_Algorithm
 
         public bool visitedAllCities { get; set; }
 
+        /// <summary>
+        /// Largest value a rand function can return.
+        /// </summary>
+        private const int RAND_MAX = 2147483647;
+
         /// <summary>Get the distance traveled based on what edges we have visited.</summary>
         public double distanceTraveled
         {
@@ -53,8 +58,13 @@ namespace Ant_Optimization_Algorithm
         public void travelToCity(City source, City destination)
         {
 
+            if(source == destination && visitedAllCities != true)
+            {
+                throw new Exception("Trying to travel to the same city!  This won't work out!");
+            }
+
             // Add the path between the current city and the destination city
-            lstPathsTraveled.Add((from thisEdge in currentCity.connectedEdges
+            lstPathsTraveled.Add((from thisEdge in currentCity.CorrectedConnectedEdges()
                                  where thisEdge.source == source && thisEdge.destination == destination
                                  select thisEdge).Single());
 
@@ -67,6 +77,12 @@ namespace Ant_Optimization_Algorithm
         /// <summary>The core of the ants creating their best path.</summary>
         public void constructAntSolution()
         {
+
+            if (visitedAllCities)
+            {
+                throw new Exception("This ant currently has a constructed solution!  Please clear it before moving on.");
+            }
+
             // Keep moving to new cities, while we have them.
             while(citiesToVisit.Count() != 0)
             {
@@ -81,15 +97,16 @@ namespace Ant_Optimization_Algorithm
             travelToCity(currentCity, visitedCities.First());
         }
 
-        public City getNextCity(double Alpha = .5, double Beta = .5)
+
+        public City getNextCity(double Alpha = 2, double Beta = 2)
         {
 
             City nextCity = new City();
 
-            List<Edge> EdgesToChooseFrom = currentCity.connectedEdges;
+            List<Edge> EdgesToChooseFrom = currentCity.CorrectedConnectedEdges();
 
             // Remove any edges whose destination is a city that we have already been to
-            EdgesToChooseFrom = (from thisEdge in currentCity.connectedEdges
+            EdgesToChooseFrom = (from thisEdge in EdgesToChooseFrom
                                  where !visitedCities.Contains(thisEdge.destination)
                                  select thisEdge).ToList();
 
@@ -105,6 +122,7 @@ namespace Ant_Optimization_Algorithm
                 // If we only have one city to choose from, no need to calculate all possibilities.
                 if(EdgesToChooseFrom.Count == 1)
                 {
+                    visitedAllCities = true;
                     return EdgesToChooseFrom.First().destination;
                 }
 

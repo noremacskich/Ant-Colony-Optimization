@@ -34,6 +34,7 @@ namespace Ant_Optimization_Algorithm
             //rtbOutput.Text = algorithm.showCities();
 
         }
+
         private void drawCity(City currentCity, Graphics canvas, bool isFirstCity = false, bool isSecondCity = false)
         {
             // Give the city the appropriate color of background, dependin on the location of the city.
@@ -63,6 +64,7 @@ namespace Ant_Optimization_Algorithm
             canvas.DrawString(currentCity.ID.ToString(), DefaultFont, Brushes.Blue, new RectangleF(currentCity.locationX, currentCity.locationY, SIZE_OF_CITY_CIRCLE, SIZE_OF_CITY_CIRCLE), centerText);
 
         }
+
         private void drawPath(Edge thisPath, Graphics canvas)
         {
 
@@ -80,6 +82,7 @@ namespace Ant_Optimization_Algorithm
             );
 
         }
+
         /// <summary>
         /// Differentiate between the first and second city.  This will help determine the direction 
         /// the ants paths are following.  Since all ants visit all cities, we can simply use 
@@ -110,6 +113,14 @@ namespace Ant_Optimization_Algorithm
 
         }
 
+        /// <summary>Keep this seperate, since each ant will want to do this.</summary>
+        private void drawPaths(List<Edge> lstOfEdges, Graphics graphic)
+        {
+            foreach (Edge path in lstOfEdges)
+            {
+                drawPath(path, graphic);
+            }
+        }
         private void button2_Click(object sender, EventArgs e)
         {
 
@@ -117,17 +128,22 @@ namespace Ant_Optimization_Algorithm
 
             graphic = pictureBox1.CreateGraphics();
 
-            foreach (Edge path in algorithm.lstOfEdges)
-            {
-                drawPath(path, graphic);
-            }
+
+            drawPaths(algorithm.lstOfEdges, graphic);
 
             drawCities(algorithm.lstOfCities, graphic);
 
 
-            //Ant thisAnt = algorithm.lstOfAnts.First();
+            Ant thisAnt = algorithm.lstOfAnts.First();
 
-            //thisAnt.constructAntSolution();
+            thisAnt.constructAntSolution();
+
+            // clear the map
+            graphic.Clear(Color.White);
+
+            drawPaths(thisAnt.lstPathsTraveled, graphic);
+
+            drawCities(thisAnt.lstAllCities, graphic);
 
             //foreach(Edge path in thisAnt.lstPathsTraveled)
             //{
