@@ -40,6 +40,16 @@ namespace Ant_Optimization_Algorithm
             canvas.DrawString(currentCity.ID.ToString(), DefaultFont, Brushes.Blue, new PointF(currentCity.locationX + 2, currentCity.locationY + 2));
 
         }
+        private void drawPath(Edge thisPath, Graphics canvas)
+        {
+
+            Pen pen1 = new Pen(Color.Blue, 3);
+
+            pen1.StartCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
+
+            canvas.DrawLine(pen1, new Point(thisPath.source.locationX, thisPath.source.locationY), new Point(thisPath.destination.locationX, thisPath.destination.locationY));
+
+        }
         private void button2_Click(object sender, EventArgs e)
         {
 
@@ -51,6 +61,15 @@ namespace Ant_Optimization_Algorithm
             {
                 drawCity(selectedCity, graphic);
             }
+
+            //Ant thisAnt = algorithm.lstOfAnts.First();
+
+            //thisAnt.constructAntSolution();
+
+            //foreach(Edge path in thisAnt.lstPathsTraveled)
+            //{
+            //    drawPath(path, graphic);
+            //}
 
         }
     }

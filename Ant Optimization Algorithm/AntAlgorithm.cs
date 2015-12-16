@@ -13,26 +13,18 @@ namespace Ant_Optimization_Algorithm
         const int GRIDSIZEX = 200;
         const int GRIDSIZEY = 200;
         const int DEFAULT_PHEROMONE_LEVEL = 5;
+        const int NUMBER_OF_CITIES = 10;
         const int NumOfAnts = 4;
 
         Random rand = new Random();
 
         gridCell[,] currentGrid = new gridCell[GRIDSIZEX,GRIDSIZEY];
 
-        List<Ant> lstOfAnts = new List<Ant>();
+        public List<Ant> lstOfAnts = new List<Ant>();
 
         public List<City> cityNodes = new List<City>();
 
         List<Edge> lstOfEdges = new List<Edge>();
-
-        public string testGetSurrounding(int positionX, int positionY)
-        {
-
-            gridCell[,] test = getSurrounding(positionX, positionY);
-
-            return updateOutput(test, 3, 3);
-
-        }
 
         public gridCell[,] getSurrounding(int cellx, int celly, int radius = 1)
         {
@@ -125,23 +117,28 @@ namespace Ant_Optimization_Algorithm
         
         private void initializeCities(int numberOfCities)
         {
-            for(int i = 0; i<numberOfCities; i++)
+
+            int[,] arrCityLocation = { { 56, 92 }, { 105, 98 }, { 20, 145 }, { 37, 38 }, { 19, 198 }, { 50, 150 }, { 75, 137 }, { 72, 48 }, { 102, 30 }, { 80, 147 } };
+
+            for (int i = 0; i<numberOfCities; i++)
             {
 
                 City tmpCity = new City { ID = i };
 
+                // Get the city location, based on static values provided
+                tmpCity.locationX = arrCityLocation[i, 0];
+                tmpCity.locationY = arrCityLocation[i, 1];
 
                 // Keep assigning random locations until we find a grid cell that doesn't have a city.
-                do
-                {
-                    tmpCity.locationX = rand.Next(GRIDSIZEX);
-                    tmpCity.locationY = rand.Next(GRIDSIZEY);
-
-                } while (currentGrid[tmpCity.locationX, tmpCity.locationY].ThisCity != null);
+                //do
+                //{
+                //    tmpCity.locationX = rand.Next(GRIDSIZEX);
+                //    tmpCity.locationY = rand.Next(GRIDSIZEY);
+                //} while (currentGrid[tmpCity.locationX, tmpCity.locationY].ThisCity != null);
 
 
                 // Assign the city to the grid
-                currentGrid[tmpCity.locationX, tmpCity.locationY].ThisCity = tmpCity;
+                //currentGrid[tmpCity.locationX, tmpCity.locationY].ThisCity = tmpCity;
                 
                 // Add it to the list of Cities
                 cityNodes.Add(tmpCity);
@@ -169,10 +166,10 @@ namespace Ant_Optimization_Algorithm
 
         }
 
-        public AntAlgorithm(int numberOfCities = 10)
+        public AntAlgorithm(int numberOfCities = NUMBER_OF_CITIES)
         {
             initializeGrid();
-            initializeCities(numberOfCities);
+            initializeCities(NUMBER_OF_CITIES);
             initializeEdges();
             initializeAnts();
         }
