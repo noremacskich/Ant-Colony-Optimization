@@ -12,8 +12,11 @@ namespace Ant_Optimization_Algorithm
 {
     public partial class Form1 : Form
     {
-        AntAlgorithm algorithm = new AntAlgorithm(9);
 
+        const int SIZE_OF_CITY_CIRCLE = 15;
+
+        AntAlgorithm algorithm = new AntAlgorithm(9);
+        
 
         public Form1()
         {
@@ -31,25 +34,82 @@ namespace Ant_Optimization_Algorithm
             //rtbOutput.Text = algorithm.showCities();
 
         }
-        private void drawCity(City currentCity, Graphics canvas)
+        private void drawCity(City currentCity, Graphics canvas, bool isFirstCity = false, bool isSecondCity = false)
         {
+            // Give the city the appropriate color of background, dependin on the location of the city.
+            // Default city background is white
+            SolidBrush myBrush = new SolidBrush(Color.White);
 
-            Pen pen1 = new Pen(Color.Blue, 3);
 
-            canvas.DrawEllipse(pen1, currentCity.locationX, currentCity.locationY, 15, 15);
-            canvas.DrawString(currentCity.ID.ToString(), DefaultFont, Brushes.Blue, new PointF(currentCity.locationX + 2, currentCity.locationY + 2));
+            if (isFirstCity)
+            {
+                myBrush.Color = Color.Green;
+            }
+            else if (isSecondCity)
+            {
+                myBrush.Color = Color.Yellow;
+            }
+
+            canvas.FillEllipse(myBrush, currentCity.locationX, currentCity.locationY, SIZE_OF_CITY_CIRCLE, SIZE_OF_CITY_CIRCLE);
+
+            // Give the city a border of blue
+            Pen pen1 = new Pen(Color.Blue, 2);
+            canvas.DrawEllipse(pen1, currentCity.locationX, currentCity.locationY, SIZE_OF_CITY_CIRCLE, SIZE_OF_CITY_CIRCLE);
+
+            // Give the city an ID number
+            StringFormat centerText = new StringFormat();
+            centerText.Alignment = StringAlignment.Center;
+            centerText.LineAlignment = StringAlignment.Center;
+            canvas.DrawString(currentCity.ID.ToString(), DefaultFont, Brushes.Blue, new RectangleF(currentCity.locationX, currentCity.locationY, SIZE_OF_CITY_CIRCLE, SIZE_OF_CITY_CIRCLE), centerText);
 
         }
         private void drawPath(Edge thisPath, Graphics canvas)
         {
 
-            Pen pen1 = new Pen(Color.Blue, 3);
+            Pen pen1 = new Pen(Color.Gray, 2);
 
-            pen1.StartCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
-
-            canvas.DrawLine(pen1, new Point(thisPath.source.locationX, thisPath.source.locationY), new Point(thisPath.destination.locationX, thisPath.destination.locationY));
+            canvas.DrawLine(pen1, 
+                new Point(
+                    thisPath.source.locationX + (SIZE_OF_CITY_CIRCLE / 2), 
+                    thisPath.source.locationY + (SIZE_OF_CITY_CIRCLE / 2)
+                ), 
+                new Point(
+                    thisPath.destination.locationX + (SIZE_OF_CITY_CIRCLE / 2), 
+                    thisPath.destination.locationY + (SIZE_OF_CITY_CIRCLE / 2)
+                )
+            );
 
         }
+        /// <summary>
+        /// Differentiate between the first and second city.  This will help determine the direction 
+        /// the ants paths are following.  Since all ants visit all cities, we can simply use 
+        /// the list of cities that the ant followed.
+        /// </summary>
+        private void drawCities(List<City> lstOfCities, Graphics graphic)
+        {
+
+            int i = 0;
+            foreach (City selectedCity in algorithm.lstOfCities)
+            {
+                // First city will have a green background
+                if (i == 0) {
+                    drawCity(selectedCity, graphic, isFirstCity: true);
+                }
+                // Second city will have yellow background
+                else if (i == 1) {
+                    drawCity(selectedCity, graphic, isSecondCity: true);
+                }
+                // Otherwise the city will be white.
+                else 
+                {
+                    drawCity(selectedCity, graphic);
+                }
+
+                i++;
+            }
+
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
 
@@ -57,13 +117,13 @@ namespace Ant_Optimization_Algorithm
 
             graphic = pictureBox1.CreateGraphics();
 
-            foreach(City selectedCity in algorithm.lstOfCities)
+            foreach (Edge path in algorithm.lstOfEdges)
             {
-                drawCity(selectedCity, graphic);
+                drawPath(path, graphic);
             }
 
+            drawCities(algorithm.lstOfCities, graphic);
 
-            //foreach( Edge path in algorithm)
 
             //Ant thisAnt = algorithm.lstOfAnts.First();
 

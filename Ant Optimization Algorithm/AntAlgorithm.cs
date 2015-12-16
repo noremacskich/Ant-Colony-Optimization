@@ -118,7 +118,7 @@ namespace Ant_Optimization_Algorithm
         private void initializeCities(int numberOfCities)
         {
 
-            int[,] arrCityLocation = { { 56, 92 }, { 105, 98 }, { 20, 145 }, { 37, 38 }, { 19, 198 }, { 50, 150 }, { 75, 137 }, { 72, 48 }, { 102, 30 }, { 80, 147 } };
+            int[,] arrCityLocation = { { 56, 92 }, { 105, 98 }, { 20, 145 }, { 37, 38 }, { 19, 198 }, { 50, 150 }, { 75, 115 }, { 72, 48 }, { 102, 30 }, { 80, 147 } };
 
             for (int i = 0; i<numberOfCities; i++)
             {
