@@ -92,7 +92,7 @@ namespace Ant_Optimization_Algorithm
         {
 
             int i = 0;
-            foreach (City selectedCity in algorithm.lstOfCities)
+            foreach (City selectedCity in lstOfCities)
             {
                 // First city will have a green background
                 if (i == 0) {
@@ -145,7 +145,7 @@ namespace Ant_Optimization_Algorithm
 
             drawPaths(thisAnt.lstPathsTraveled, graphic);
 
-            drawCities(thisAnt.lstAllCities, graphic);
+            drawCities(thisAnt.visitedCities, graphic);
 
             //foreach(Edge path in thisAnt.lstPathsTraveled)
             //{
