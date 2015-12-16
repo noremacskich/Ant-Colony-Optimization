@@ -136,6 +136,8 @@ namespace Ant_Optimization_Algorithm
 
             Ant thisAnt = algorithm.lstOfAnts.First();
 
+            thisAnt.resetAntSolution();
+
             thisAnt.constructAntSolution();
 
             // clear the map

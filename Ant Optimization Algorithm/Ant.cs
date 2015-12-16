@@ -144,6 +144,25 @@ namespace Ant_Optimization_Algorithm
 
         }
 
+        /// <summary>Resets an ant to allow another run at a solution.</summary>
+        public void resetAntSolution()
+        {
+
+            lstPathsTraveled.Clear();
+            visitedCities.Clear();
+
+            visitedAllCities = false;
+
+            // Give the ant a random initial city
+
+            Random tmpRand = new Random();
+
+            int startingCity = tmpRand.Next(0, lstAllCities.Count());
+
+            visitedCities.Add(lstAllCities[startingCity]);
+
+        }
+
         public Ant(int thisAntID, List<City> lstOfCities)
         {
             antID = thisAntID;
