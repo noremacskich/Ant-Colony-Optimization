@@ -57,10 +57,13 @@ namespace Ant_Optimization_Algorithm
 
             graphic = pictureBox1.CreateGraphics();
 
-            foreach(City selectedCity in algorithm.cityNodes)
+            foreach(City selectedCity in algorithm.lstOfCities)
             {
                 drawCity(selectedCity, graphic);
             }
+
+
+            //foreach( Edge path in algorithm)
 
             //Ant thisAnt = algorithm.lstOfAnts.First();
 

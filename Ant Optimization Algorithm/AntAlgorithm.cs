@@ -22,9 +22,9 @@ namespace Ant_Optimization_Algorithm
 
         public List<Ant> lstOfAnts = new List<Ant>();
 
-        public List<City> cityNodes = new List<City>();
+        public List<City> lstOfCities = new List<City>();
 
-        List<Edge> lstOfEdges = new List<Edge>();
+        public List<Edge> lstOfEdges = new List<Edge>();
 
         public gridCell[,] getSurrounding(int cellx, int celly, int radius = 1)
         {
@@ -83,14 +83,14 @@ namespace Ant_Optimization_Algorithm
 
             List<City> completedNodes = new List<City>();
 
-            foreach(City node in cityNodes)
+            foreach(City node in lstOfCities)
             {
                 // Add the node to the completed list, to avoid 
                 // links to itself.
                 completedNodes.Add(node);
 
                 // Create a link to every other city that this node currently doesn't have access to.
-                foreach (City otherNode in cityNodes.Except(completedNodes).ToList())
+                foreach (City otherNode in lstOfCities.Except(completedNodes).ToList())
                 {
                     Edge tmpEdge = new Edge()
                     {
@@ -141,7 +141,7 @@ namespace Ant_Optimization_Algorithm
                 //currentGrid[tmpCity.locationX, tmpCity.locationY].ThisCity = tmpCity;
                 
                 // Add it to the list of Cities
-                cityNodes.Add(tmpCity);
+                lstOfCities.Add(tmpCity);
 
             }
         }
@@ -151,9 +151,9 @@ namespace Ant_Optimization_Algorithm
         {
             
             
-            foreach( City city in cityNodes)
+            foreach( City city in lstOfCities)
             {
-                Ant tmpAnt = new Ant(city.ID, cityNodes);
+                Ant tmpAnt = new Ant(city.ID, lstOfCities);
 
                 tmpAnt.visitedCities.Add(city);
 
