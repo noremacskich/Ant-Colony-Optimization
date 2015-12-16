@@ -16,6 +16,13 @@ namespace Ant_Optimization_Algorithm
         const int NUMBER_OF_CITIES = 10;
         const int NumOfAnts = 4;
 
+        const double evaporationCoefficient = 0.5;
+
+        /// <summary>Relative importance of pheromne trail</summary>
+        const double ALPHA = 0.5;
+        /// <summary>Relative imporatnce of distance between cities</summary>
+        const double BETA = 0.5;
+
         Random rand = new Random();
 
         gridCell[,] currentGrid = new gridCell[GRIDSIZEX,GRIDSIZEY];
@@ -163,6 +170,38 @@ namespace Ant_Optimization_Algorithm
             }
             
 
+
+        }
+
+        /// <summary>
+        /// This function assumes that all ants are done with their tours.
+        /// </summary>
+        public void updatePheromones()
+        {
+
+            // ???
+            int QVAL = 100;
+
+            // Evaporation of the pheromones
+            foreach(Edge path in lstOfEdges)
+            {
+                path.PheromoneLevel *= -evaporationCoefficient;
+            }
+
+
+            // Addition of the pheromones
+
+            foreach(Ant thisAnt in lstOfAnts)
+            {
+
+                foreach(Edge path in thisAnt.lstPathsTraveled)
+                {
+
+                    path.PheromoneLevel += (QVAL / thisAnt.distanceTraveled);
+
+                }
+
+            }
 
         }
 
