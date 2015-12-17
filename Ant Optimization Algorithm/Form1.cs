@@ -65,6 +65,16 @@ namespace Ant_Optimization_Algorithm
 
         }
 
+        private Point getMidpoint(Edge thisPath)
+        {
+            Point midPoint = new Point();
+
+            midPoint.X = ((thisPath.destination.locationX + thisPath.source.locationX) / 2);
+            midPoint.Y = ((thisPath.destination.locationY + thisPath.source.locationY) / 2);
+
+            return midPoint;
+        }
+
         private void drawPath(Edge thisPath, Graphics canvas)
         {
 
@@ -80,6 +90,8 @@ namespace Ant_Optimization_Algorithm
                     thisPath.destination.locationY + (SIZE_OF_CITY_CIRCLE / 2)
                 )
             );
+
+            canvas.DrawString(thisPath.PheromoneLevel.ToString("F"), DefaultFont, Brushes.Red, getMidpoint(thisPath));
 
         }
 
@@ -121,6 +133,30 @@ namespace Ant_Optimization_Algorithm
                 drawPath(path, graphic);
             }
         }
+
+        private void drawAllPaths(Graphics graphic)
+        {
+            foreach (Edge path in algorithm.lstOfEdges)
+            {
+                drawPath(path, graphic);
+            }
+        }
+        
+        private void drawAllCities(Graphics graphic)
+        {
+            foreach(City thisCity in algorithm.lstOfCities)
+            {
+                drawCity(thisCity, graphic);
+            }
+        }
+
+        private void drawEverything(Graphics graphic)
+        {
+            graphic.Clear(Color.White);
+            drawAllPaths(graphic);
+            drawAllCities(graphic);
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
 
@@ -129,28 +165,20 @@ namespace Ant_Optimization_Algorithm
             graphic = pictureBox1.CreateGraphics();
 
 
-            drawPaths(algorithm.lstOfEdges, graphic);
 
-            drawCities(algorithm.lstOfCities, graphic);
+            drawEverything(graphic);
+
+            algorithm.mainDriver();
+
+            System.Drawing.Graphics graphic2;
+
+            graphic2 = pictureBox2.CreateGraphics();
+
+            drawEverything(graphic2);
+
+            //drawAllPaths(graphic);
 
 
-            Ant thisAnt = algorithm.lstOfAnts.First();
-
-            thisAnt.resetAntSolution();
-
-            thisAnt.constructAntSolution();
-
-            // clear the map
-            graphic.Clear(Color.White);
-
-            drawPaths(thisAnt.lstPathsTraveled, graphic);
-
-            drawCities(thisAnt.visitedCities, graphic);
-
-            //foreach(Edge path in thisAnt.lstPathsTraveled)
-            //{
-            //    drawPath(path, graphic);
-            //}
 
         }
     }

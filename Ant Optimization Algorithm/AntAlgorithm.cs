@@ -205,6 +205,33 @@ namespace Ant_Optimization_Algorithm
 
         }
 
+        public void getAntsSolutions()
+        {
+
+            foreach(Ant thisAnt in lstOfAnts)
+            {
+                thisAnt.resetAntSolution();
+
+                thisAnt.constructAntSolution();
+            }
+
+        }
+
+        public void mainDriver()
+        {
+
+            // Get the ants to create new solutions
+            getAntsSolutions();
+
+            // Apply the pheromone properties
+            updatePheromones();
+
+            // Print out the best solution as of right now
+
+            
+        }
+
+
         public AntAlgorithm(int numberOfCities = NUMBER_OF_CITIES)
         {
             initializeGrid();
