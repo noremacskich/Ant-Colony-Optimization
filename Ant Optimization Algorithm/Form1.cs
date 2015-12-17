@@ -47,12 +47,9 @@ namespace Ant_Optimization_Algorithm
 
             //drawAllPaths(graphic);
 
-            System.Drawing.Graphics graphic3;
+            drawBestMap();
 
-            graphic3 = pictureBox3.CreateGraphics();
-
-            drawBestMap(graphic3);
-
+            button1.Text = "Continue Simulation";
         }
 
         private void drawCity(City currentCity, Graphics canvas, bool isFirstCity = false, bool isSecondCity = false)
@@ -154,8 +151,12 @@ namespace Ant_Optimization_Algorithm
             }
         }
         
-        private void drawBestMap(Graphics graphic)
+        private void drawBestMap()
         {
+            System.Drawing.Graphics graphic;
+
+            graphic = pictureBox3.CreateGraphics();
+
             graphic.Clear(Color.White);
 
             foreach (Edge path in algorithm.lstBestPath)
@@ -183,13 +184,6 @@ namespace Ant_Optimization_Algorithm
             {
                 drawCity(thisCity, graphic);
             }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-
-
         }
     }
 }
