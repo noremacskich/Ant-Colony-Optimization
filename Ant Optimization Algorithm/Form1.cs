@@ -31,7 +31,27 @@ namespace Ant_Optimization_Algorithm
         private void button1_Click(object sender, EventArgs e)
         {
 
-            //rtbOutput.Text = algorithm.showCities();
+            System.Drawing.Graphics graphic;
+
+            graphic = pictureBox1.CreateGraphics();
+
+            drawEverything(graphic);
+
+            algorithm.mainDriver();
+
+            System.Drawing.Graphics graphic2;
+
+            graphic2 = pictureBox2.CreateGraphics();
+
+            drawEverything(graphic2);
+
+            //drawAllPaths(graphic);
+
+            System.Drawing.Graphics graphic3;
+
+            graphic3 = pictureBox3.CreateGraphics();
+
+            drawBestMap(graphic3);
 
         }
 
@@ -133,50 +153,40 @@ namespace Ant_Optimization_Algorithm
                 drawPath(path, graphic);
             }
         }
-
-        private void drawAllPaths(Graphics graphic)
+        
+        private void drawBestMap(Graphics graphic)
         {
-            foreach (Edge path in algorithm.lstOfEdges)
+            graphic.Clear(Color.White);
+
+            foreach (Edge path in algorithm.lstBestPath)
             {
                 drawPath(path, graphic);
             }
-        }
-        
-        private void drawAllCities(Graphics graphic)
-        {
-            foreach(City thisCity in algorithm.lstOfCities)
+
+            foreach (City thisCity in algorithm.lstBestCities)
             {
                 drawCity(thisCity, graphic);
             }
         }
 
+        /// <summary>Draws the default map.</summary>
         private void drawEverything(Graphics graphic)
         {
             graphic.Clear(Color.White);
-            drawAllPaths(graphic);
-            drawAllCities(graphic);
+
+            foreach (Edge path in algorithm.lstOfEdges)
+            {
+                drawPath(path, graphic);
+            }
+
+            foreach (City thisCity in algorithm.lstOfCities)
+            {
+                drawCity(thisCity, graphic);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-
-            System.Drawing.Graphics graphic;
-
-            graphic = pictureBox1.CreateGraphics();
-
-
-
-            drawEverything(graphic);
-
-            algorithm.mainDriver();
-
-            System.Drawing.Graphics graphic2;
-
-            graphic2 = pictureBox2.CreateGraphics();
-
-            drawEverything(graphic2);
-
-            //drawAllPaths(graphic);
 
 
 

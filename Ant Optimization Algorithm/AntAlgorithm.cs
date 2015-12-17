@@ -23,6 +23,8 @@ namespace Ant_Optimization_Algorithm
         /// <summary>Relative imporatnce of distance between cities</summary>
         const double BETA = 0.5;
 
+        float bestTraveled = float.PositiveInfinity;
+
         Random rand = new Random();
 
         gridCell[,] currentGrid = new gridCell[GRIDSIZEX,GRIDSIZEY];
@@ -32,6 +34,10 @@ namespace Ant_Optimization_Algorithm
         public List<City> lstOfCities = new List<City>();
 
         public List<Edge> lstOfEdges = new List<Edge>();
+
+        public List<Edge> lstBestPath = new List<Edge>();
+
+        public List<City> lstBestCities = new List<City>();
 
         public gridCell[,] getSurrounding(int cellx, int celly, int radius = 1)
         {
@@ -185,7 +191,7 @@ namespace Ant_Optimization_Algorithm
             // Evaporation of the pheromones
             foreach(Edge path in lstOfEdges)
             {
-                path.PheromoneLevel *= -evaporationCoefficient;
+                path.PheromoneLevel *= (1-evaporationCoefficient);
             }
 
 
@@ -213,6 +219,25 @@ namespace Ant_Optimization_Algorithm
                 thisAnt.resetAntSolution();
 
                 thisAnt.constructAntSolution();
+
+                if(thisAnt.distanceTraveled < bestTraveled)
+                {
+                    lstBestPath.Clear();
+                    lstBestCities.Clear();
+
+                    foreach (Edge path in thisAnt.lstPathsTraveled)
+                    {
+                        lstBestPath.Add(new Edge(path));
+
+                    }
+
+                    foreach(City thisCity in thisAnt.visitedCities)
+                    {
+
+                        lstBestCities.Add(new City(thisCity));
+
+                    }
+                }
             }
 
         }

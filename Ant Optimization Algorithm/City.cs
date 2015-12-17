@@ -18,6 +18,19 @@ namespace Ant_Optimization_Algorithm
 
         public List<Edge> connectedEdges = new List<Edge>();
 
+        public City(City thisCity)
+        {
+            Name = thisCity.Name;
+            ID = thisCity.ID;
+            currentAnt = thisCity.currentAnt;
+            connectedEdges = new List<Edge>(thisCity.connectedEdges);
+            locationX = thisCity.locationX;
+            locationY = thisCity.locationY;
+        }
+
+        // Allow default constructor
+        public City() { } 
+
         /// <summary>Returns the list of edges with a normalized source, meaning the source property is all the same.
         /// needed to allow the getNextCity function to correctly filter out the paths to the cities we have already visited, based 
         /// off the the destination variable.  Without this, it was causing some of the later cities (8, 9) etc to filter out both valid and invalid paths.

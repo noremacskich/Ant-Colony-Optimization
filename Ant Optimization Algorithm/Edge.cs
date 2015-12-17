@@ -16,6 +16,16 @@ namespace Ant_Optimization_Algorithm
 
         public int ID { get; set; }
 
+        public Edge() { }
+
+        public Edge(Edge path)
+        {
+            ID = path.ID;
+            destination = new City(path.destination);
+            source = new City(path.source);
+            PheromoneLevel = path.PheromoneLevel;
+        }
+
         public double PheromoneLevel { get; set; }
 
         public double subProbability(double Alpha, double Beta)
