@@ -50,6 +50,8 @@ namespace Ant_Optimization_Algorithm
             drawBestMap();
 
             button1.Text = "Continue Simulation";
+
+            button2.Enabled = true;
         }
 
         private void drawCity(City currentCity, Graphics canvas, bool isFirstCity = false, bool isSecondCity = false)
@@ -184,6 +186,16 @@ namespace Ant_Optimization_Algorithm
             {
                 drawCity(thisCity, graphic);
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+            algorithm = new AntAlgorithm(9);
+
+            
+
+            button2.Enabled = false;
         }
     }
 }
