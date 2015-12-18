@@ -13,7 +13,7 @@ namespace Ant_Optimization_Algorithm
         const int GRIDSIZEX = 200;
         const int GRIDSIZEY = 200;
         const int DEFAULT_PHEROMONE_LEVEL = 5;
-        const int NUMBER_OF_CITIES = 10;
+        const int NUMBER_OF_CITIES = 9;
         const int NumOfAnts = 4;
 
         const double evaporationCoefficient = 0.5;
@@ -131,7 +131,7 @@ namespace Ant_Optimization_Algorithm
         private void initializeCities(int numberOfCities)
         {
 
-            int[,] arrCityLocation = { { 56, 92 }, { 105, 98 }, { 20, 145 }, { 37, 38 }, { 19, 198 }, { 50, 150 }, { 75, 115 }, { 72, 48 }, { 102, 30 }, { 80, 147 } };
+            int[,] arrCityLocation = { { 96, 24 }, { 149, 45 }, { 172, 98 }, { 149, 152 }, { 96, 173 }, { 45, 151 }, { 22, 99 }, { 44, 46 }, { 100, 100 } };
 
             for (int i = 0; i<numberOfCities; i++)
             {
