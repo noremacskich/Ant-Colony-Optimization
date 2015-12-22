@@ -82,7 +82,7 @@ namespace Ant_Optimization_Algorithm
         }
 
         /// <summary>The core of the ants creating their best path.</summary>
-        public void constructAntSolution()
+        public void constructAntSolution(double Alpha = .5, double Beta = .5)
         {
 
             if (visitedAllCities)
@@ -94,7 +94,7 @@ namespace Ant_Optimization_Algorithm
             while(citiesToVisit.Count() != 0)
             {
 
-                City nextCity = getNextCity();
+                City nextCity = getNextCity(Alpha, Beta);
 
                 travelToCity(currentCity, nextCity);
 
@@ -107,7 +107,7 @@ namespace Ant_Optimization_Algorithm
         }
 
 
-        public City getNextCity(double Alpha = 2, double Beta = 2)
+        public City getNextCity(double Alpha = .5, double Beta = .5)
         {
 
             City nextCity = new City();

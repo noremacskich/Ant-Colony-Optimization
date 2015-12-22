@@ -16,7 +16,7 @@ namespace Ant_Optimization_Algorithm
         const int NUMBER_OF_CITIES = 9;
         const int NumOfAnts = 4;
 
-        const double evaporationCoefficient = 0.5;
+        const double evaporationCoefficient = 0.125;
 
         /// <summary>Relative importance of pheromne trail</summary>
         const double ALPHA = 0.5;
@@ -191,7 +191,7 @@ namespace Ant_Optimization_Algorithm
             // Evaporation of the pheromones
             foreach(Edge path in lstOfEdges)
             {
-                path.PheromoneLevel *= (1-evaporationCoefficient);
+                path.PheromoneLevel *= (1 - evaporationCoefficient);
             }
 
 
@@ -218,7 +218,7 @@ namespace Ant_Optimization_Algorithm
             {
                 thisAnt.resetAntSolution();
 
-                thisAnt.constructAntSolution();
+                thisAnt.constructAntSolution(ALPHA, BETA);
 
                 if(thisAnt.distanceTraveled < bestTraveled)
                 {
